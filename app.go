@@ -6,6 +6,7 @@ import (
 	"os"
 )
 
+// Path do arquivo
 var filePath string = ""
 
 func main() {
@@ -18,7 +19,7 @@ func main() {
 		return
 	}
 	defer file.Close()
-	lines, err := excel.OpenExcelNnm(file)
+	lines, err := excel.OpenExcel(file)
 	if err != nil {
 		// Campo "file" não está presente no formulário
 		fmt.Println("Erro na converção em struct")

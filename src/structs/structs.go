@@ -7,7 +7,7 @@ import "time"
 // O xlsx deve conter exatamente o nome da coluna que coresponde a o campo da struct
 // EX:
 //`xlsx:"AQUI VC COLOCA O NOME DA COLUNA"`
-type Nnm struct {
+type Linha struct {
 	Conta      int       `xlsx:"'DL_F_MovimentaçãoCosolidada'[COD_CARTEIRA]"`
 	Nome       string    `xlsx:"NOME"`
 	Quantidade int       `xlsx:"QUANTIDADE"`

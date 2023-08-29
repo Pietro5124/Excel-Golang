@@ -12,7 +12,7 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
-func OpenExcelNnm(file io.Reader) ([]structs.Nnm, error) {
+func OpenExcel(file io.Reader) ([]structs.Linha, error) {
 	// Linha de Inicio que o excel começa a ler obs: A lista inicia a contagem de linha pelo 0
 	var StarLine int = 2
 
@@ -20,19 +20,19 @@ func OpenExcelNnm(file io.Reader) ([]structs.Nnm, error) {
 	excel, err := excelize.OpenReader(file)
 	if err != nil {
 		// Tratar o erro
-		return []structs.Nnm{}, err
+		return []structs.Linha{}, err
 	}
 
-	var lines []structs.Nnm
+	var lines []structs.Linha
 
 	rows, err := excel.GetRows("Sheet1")
 	if err != nil {
-		return []structs.Nnm{}, err
+		return []structs.Linha{}, err
 	}
 	// Aqui vc define apartir de que linha começa a tabela
 	headerRow := rows[StarLine]
 
-	fieldMap := getFieldMap(reflect.TypeOf(structs.Nnm{}))
+	fieldMap := getFieldMap(reflect.TypeOf(structs.Linha{}))
 
 	// Encontra o índice da coluna para cada campo da struct pelo nome
 	fieldIndexes := make(map[string]int)
@@ -48,7 +48,7 @@ func OpenExcelNnm(file io.Reader) ([]structs.Nnm, error) {
 
 	// Lê os dados da planilha iniciando pela linha de inicio e preenche a struct
 	for _, row := range rows[StarLine+1:] {
-		line := structs.Nnm{}
+		line := structs.Linha{}
 
 		for fieldName, fieldIndex := range fieldIndexes {
 			// Pega o campo da Struct pelo nome da mesma
